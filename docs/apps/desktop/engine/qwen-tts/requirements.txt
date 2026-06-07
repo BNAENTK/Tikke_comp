@@ -1,0 +1,31 @@
+# Qwen3-TTS 서버 의존성
+# Python 3.10+ 권장, 3.12 확인됨
+
+# 서버 프레임워크
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.0.0
+
+# TTS 모델
+qwen-tts>=0.1.0
+
+# 오디오 처리
+soundfile>=0.12.1
+numpy>=1.24.0
+
+# MP3 변환 (선택 — ffmpeg 설치 필요)
+pydub>=0.25.1
+
+# 환경변수 관리 (선택)
+python-dotenv>=1.0.0
+
+# 부모 프로세스 PID 모니터링 (좀비 방지 watchdog)
+psutil>=5.9.0
+
+# PyTorch — CUDA 버전은 별도 설치 필요
+# CUDA 12.1:
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu121
+# CPU only:
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+torch>=2.1.0
+torchaudio>=2.1.0

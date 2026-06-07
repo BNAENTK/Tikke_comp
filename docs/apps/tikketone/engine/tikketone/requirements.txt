@@ -1,0 +1,6 @@
+qwen-tts>=0.1.0
+soundfile
+numpy
+librosa
+openai-whisper
+pydub
