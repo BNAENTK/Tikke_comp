@@ -14,6 +14,8 @@
 - [[Tikke Claude Code 프롬프트 템플릿]]
 - [[Tikke Claude Code 프롬프트 템플릿 - TTS 보이스 클로닝 저지연 구현편]]
 - [[Tikke 작업 기록]]
+- [[Tikke 리그 컷오프 자체수집 + 앵커]]
+- [[Tikke 리그 팝 배지 (조각 시스템)]]
 - [[Obsidian 자동 저장 정책]]
 
 ## 관련 저장소
