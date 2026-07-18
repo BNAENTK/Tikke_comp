@@ -91,3 +91,12 @@
 - 확인: 문서 동기화는 소스코드 확장자·비밀키·토큰·credential 패턴 복사 0건, 커밋 `e3c8a15`로 확인했다.
 - 확인: Obsidian 동기화는 `.obsidian`, `.trash`, 백업 파일 제외와 민감정보 의심 파일 제외 0건, 커밋 `1ffbcf4`로 확인했다.
 - 다음: 자동 동기화 제외 규칙과 private repo 전제를 계속 주기 점검한다.
+
+## 2026-07-18
+
+- 결정: `Tikke_comp` 백업은 소스코드·비밀정보·앱 설정을 제외하고 문서와 Obsidian Markdown만 선별 동기화하는 정책을 유지한다.
+- 작업: `tikke` 문서/설계 파일 56개를 `Tikke_comp/docs/`에 재동기화하고 안전 검사를 수행했다.
+- 작업: Obsidian 볼트 Markdown 84개를 `Tikke_comp/obsidian/`에 재동기화하고 GitHub 원격에 푸시했다.
+- 확인: 문서 동기화는 소스코드 확장자·제외 디렉토리·비밀정보 패턴 위반 0건, Git 상태 `main` clean으로 확인했다.
+- 확인: Obsidian 동기화는 `.obsidian`, `.trash`, Markdown 외 파일 미복사와 민감정보 제외 0건, 커밋 `97b55e3`로 확인했다.
+- 다음: `.venv` 같은 생성물 제외 규칙과 private repo 전제를 계속 주기 점검한다.
