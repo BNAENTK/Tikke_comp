@@ -1,0 +1,65 @@
+Tikke docs sync manifest
+source: C:\Users\zkfma\OneDrive\바탕 화면\claude-code\tikke
+files_copied: 58
+skipped_code_files: 0
+skipped_secret_pattern_files: 0
+excluded_dirs_pruned: 19
+
+.claude/agents/bug-fixer.md
+.claude/agents/code-reviewer.md
+.claude/agents/feature-developer.md
+.claude/agents/release-manager.md
+.claude/agents/ui-improver.md
+.claude/commands/add-feature.md
+.claude/commands/fix-bug.md
+.claude/commands/improve-ui.md
+.claude/commands/release-check.md
+.claude/commands/review-changes.md
+.kkirikkiri/teams/kkirikkiri-development-20260604-1736-5b3e/TEAM_FINDINGS.md
+.kkirikkiri/teams/kkirikkiri-development-20260604-1736-5b3e/TEAM_PLAN.md
+.kkirikkiri/teams/kkirikkiri-development-20260604-1736-5b3e/TEAM_PROGRESS.md
+.kkirikkiri/teams/kkirikkiri-development-20260604-1736-5b3e/agents/tikke-critic.md
+.kkirikkiri/teams/kkirikkiri-development-20260604-1736-5b3e/agents/tikke-desktop-dev.md
+.kkirikkiri/teams/kkirikkiri-development-20260604-1736-5b3e/agents/tikke-lead.md
+.kkirikkiri/teams/kkirikkiri-development-20260604-1736-5b3e/agents/tikke-web-dev.md
+.kkirikkiri/teams/kkirikkiri-development-20260604-1736-5b3e/report.md
+CLAUDE.md
+README.md
+adsense-checklist.md
+apps/desktop/checklist.md
+apps/desktop/context-notes.md
+apps/desktop/engine/qwen-tts/requirements.txt
+apps/desktop/harness/README.md
+apps/tikketone/engine/tikketone/requirements.txt
+apps/web/ads.txt
+apps/web/robots.txt
+checklist-gift-video.md
+checklist-giphy-overlay.md
+checklist-league-badge.md
+checklist-online-users.md
+checklist-plaque.md
+checklist-semantle.md
+checklist-topdonor-text-effects.md
+checklist-tts-premium.md
+checklist-ytmp3.md
+context-notes-adsense.md
+context-notes-gift-video.md
+context-notes-league-badge.md
+context-notes-league-harvester.md
+context-notes-online-users.md
+context-notes-semantle.md
+context-notes-settings-persistence.md
+context-notes-supertonic.md
+context-notes-tikfinity-import.md
+context-notes-tts-premium.md
+context-notes-ytmp3.md
+docs/BUILD.md
+docs/CLOUDFLARE.md
+docs/HARNESS.md
+docs/SECURITY.md
+docs/SETUP.md
+docs/SUPABASE.md
+docs/overlay-system.md
+docs/top-gift-overlay.md
+services/qwen-tts/README.md
+services/qwen-tts/requirements.txt
