@@ -77,3 +77,44 @@ TikTok LIVE 방송 중 시청자 채팅을 인식해 꼬맨틀류 단어 유사�
 - 클라우드 DO 재연결 시 상태 재전송은 worker DO 동작에 의존(확인 안 함). 로컬은 onClientConnect로 재전송 추가됨. 클라우드 오버레이가 게임 도중 로드 시 다음 broadcast까지 빈 보드일 수 있음 — 필요시 worker DO에 semantle last-state 캐시 추가.
 - Phase 2: 꼬오맨틀(koo.bfy.kr, FastAPI 경로 미확인) + 뉴맨틀(newmantle.kr, Next.js) API 리버스.
 - 임계값(1st/10th/1000th score) 오버레이 표시 — 선택.
+
+## 2026-08-28 — "꼬오맨틀 세션(/start) 생성 실패" 원인
+
+**우리 버그 아니다. 상대 서버가 죽었다.**
+
+실측(2026-08-28 02:09Z):
+```
+GET https://koo.bfy.kr/start   → 522  (Server: cloudflare, 본문 "error code: 522")
+GET https://koo.bfy.kr/        → 522
+GET https://semantle-ko.newsjel.ly/ → 200      ← 꼬맨틀은 정상
+```
+522 = Cloudflare 가 오리진에 못 붙는 상태. DNS 는 살아 있고(CF 프록시 IP) 오리진만 응답 없음.
+→ **지금은 꼬맨틀로 바꿔서 진행하면 된다.** 꼬오맨틀은 상대가 서버를 살려야 한다.
+
+단, 화면 메시지가 원인을 못 짚어 준다는 문제는 우리 쪽이라 고쳤다.
+
+### 고친 것 (`electron/services/semantle/`)
+- `types.ts` — `jsonOrThrow(res, label)` 추가. `!res.ok` 면 **상태코드 + 본문 앞 80자**를 담아 던진다.
+  그냥 `res.json()` 하면 CF 의 text/plain 본문에서 SyntaxError 가 나 우리 파싱 버그처럼 보인다.
+- `koomantle-adapter.ts` / `komantle-adapter.ts` — `startGame` 이 `jsonOrThrow` 사용.
+  `guess` 는 **5xx 만 던진다**(4xx 는 기존대로 무효 단어 취급).
+  이유: 서버 장애를 무효 단어로 처리하면 그 결과가 `semantle-service` 캐시에 박혀
+  **서버가 살아난 뒤에도 그 단어가 계속 무효**로 남는다. 잠재 버그였고 같이 막았다.
+- 파싱 실패는 원래대로 던진다 — `{}` 로 삼키면 sim 없는 응답이 0% 로 보드에 올라간다(회귀 방지).
+
+### 검증
+가짜 fetcher 하네스 6케이스(외부 서버 없이):
+```
+start 522        → throw "꼬오맨틀 /start 서버 응답 522 — error code: 522"
+start 200 sess없음 → throw "꼬오맨틀 세션(/start) 생성 실패 — 응답에 sess 없음"
+start 200 정상    → "abc"
+guess 522        → throw "꼬오맨틀 /guess 서버 응답 522"
+guess 4xx 무효    → invalid:true  (기존 동작 유지)
+guess 200 정상    → sim 42%       (기존 동작 유지)
+```
+desktop typecheck 통과. 배포 안 함.
+
+### 미확정
+K 스크린샷 시점의 메시지는 "세션 생성 실패"(= JSON 은 왔는데 `sess` 없음)였다. 지금 관측되는 522 는
+JSON 자체가 아니라 text/plain 이라 **같은 순간의 응답이 지금과 같았는지는 확인할 수 없다.**
+오리진이 오르내리는 중일 가능성이 있다. 어느 쪽이든 현재 상태는 서버 다운이다.

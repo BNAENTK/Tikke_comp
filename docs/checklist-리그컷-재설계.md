@@ -43,3 +43,19 @@
 
 ## 배포
 - [ ] 사용자가 "배포해" 명시할 때만
+
+## A 유지컷 60% → 50% 전환 대응 (2026-08-28)
+- [x] worker `routes/cutoffs.ts` — A 캐논 `[1,10,20,50,60]`, `maintOf()`, `pickMaint()` (유지 칸 1개만 서빙)
+- [x] worker `routes/cutoffs.ts` — PRIOR_FALLBACK A 50% 비율 0.52 추가(08-27 실측 3리그 중앙값)
+- [x] worker `routes/anchor.ts` — `MAINT_PCTS` 도입, `keepPct = 값 있는 유지% 우선`, 조각 총수 계산 보정
+- [x] worker `lib/league-discovery.ts` — 수집 겨냥 캐논 A `[1,10,20,50]`(실제로 오는 쪽만)
+- [x] desktop `services/league-cutoff-collector.ts` — CANON A 50·60 둘 다, KEEP_PCTS 배열화
+- [x] desktop `pages/LeagueCutoffs.tsx` — 유지 칸 `percentile 50 / alt 60`, 범례 "50-80%"
+- [x] desktop `pages/LeagueRankings.tsx` — fragBands A 60 → 50
+- [x] web `pages/LeagueCutoffs.tsx` — 동일(alt 폴백, stale 기준 `>= 50`)
+- [x] web `pages/LeagueRankings.tsx` — fragBands A 60 → 50
+- [x] web `cutoffs/index.html`(정적) — 칸 alt 폴백 + `p:50`
+- [x] overlay `anchor-badge.html` 데모 유지% A 60 → 50 (desktop·worker 양쪽 동일)
+- [x] typecheck 3종(worker·web·desktop) 통과
+- [x] `wrangler dev --local` 실측 검증 — A 유지 50% 3리그 전부 채워짐, 외부(tikdo) 대비 ±5%
+- [ ] 배포 (K 지시 대기)
